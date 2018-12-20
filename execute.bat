@@ -1,0 +1,1 @@
+.\libs\nunit.consolerunner.3.9.0\tools\nunit3-console.exe tiver_cockatiel.dll
