@@ -1,0 +1,2 @@
+test_details,post_url,request_body,response_body
+simple json,http://httpbin.org/post,{"key":"value"},{"key":"value"}
