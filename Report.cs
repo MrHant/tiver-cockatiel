@@ -21,7 +21,10 @@ namespace tiver_cockatiel
             try
             {
                 var log = ReadLogFile(logFilepath);
-                var temp = log.GroupBy(l => $"{l["Properties"]["TestId"].Value<string>()} - {l["Properties"]["TestName"].Value<string>()}");
+                var temp = log.GroupBy(l => Tuple.Create(
+                    l["Properties"]["TestId"].Value<string>(),
+                    l["Properties"]["TestName"].Value<string>()
+                ));
                 var data = temp.ToDictionary(l => l.Key);
 
                 return template(new Dictionary<string,object>()
