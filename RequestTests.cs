@@ -30,7 +30,7 @@ namespace tiver_cockatiel
                     new StringContent(requestBody, Encoding.UTF8, "application/json"))
                 .Result;
             Logger.Information("Actual Response code", response.StatusCode.ToString());
-            Logger.Information("Actual Response body", responseBody);
+            Logger.Information("Actual Response body", response.Content.ReadAsStringAsync().Result);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             Assert.AreEqual(responseBody, response.Content.ReadAsStringAsync().Result);
         }
