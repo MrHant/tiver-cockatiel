@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Net.Mime;
 using NUnit.Framework;
 using Serilog;
 using Serilog.Formatting.Json;
@@ -15,12 +16,15 @@ namespace tiver_cockatiel.Logging
                 return;
             }
 
+            Context.LogDatetime = $"{DateTime.Now:yyyyMMdd_hhmmss}";
+            Context.LogFilepath = $"./output/{Context.LogDatetime}_log.txt";
+            
             Log.Logger = new LoggerConfiguration()
                 .Enrich.With(new TestDetailsEnricher())
                 .WriteTo.Async(
                     a => a.File(
                         new JsonFormatter(),
-                        Path.Combine(TestContext.CurrentContext.TestDirectory, $"./output/{DateTime.Now:yyyyMMdd_hhmmss}_log.txt")))
+                        Path.Combine(TestContext.CurrentContext.TestDirectory, Context.LogFilepath)))
                 .CreateLogger();
             _configured = true;
         }
